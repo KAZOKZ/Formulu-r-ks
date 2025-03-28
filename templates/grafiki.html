@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>Datu vizualizācija</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigācija -->
+    <nav>
+        <a href="{{ url_for('index') }}">🏠 Sākums</a>
+        <a href="{{ url_for('grafiki') }}">📊 Datu vizualizācija</a>
+        <a href="{{ url_for('upload_csv') }}">📁 CSV augšupielāde</a>
+    </nav>
+
+    <div class="container">
+        <h1>Datu vizualizācija</h1>
+
+        <h2>Laukumu sadalījuma histogramma</h2>
+        <img src="{{ url_for('static', filename='histogram.png') }}" alt="Histogramma" class="image">
+
+        <h2>Figūru biežuma stabiņu diagramma</h2>
+        <img src="{{ url_for('static', filename='bar_chart.png') }}" alt="Stabiņu diagramma" class="image">
+    </div>
+</body>
+</html>

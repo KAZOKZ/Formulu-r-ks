@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>CSV augšupielāde</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigācija -->
+    <nav class="nav">
+        <a href="{{ url_for('index') }}">🏠 Sākums</a>
+        <a href="{{ url_for('grafiki') }}">📊 Datu vizualizācija</a>
+        <a href="{{ url_for('upload_csv') }}">📁 CSV augšupielāde</a>
+    </nav>
+
+    <div class="container fade-in">
+        <h1>📁 Augšupielādēt CSV failu</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('upload_csv') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+            <input type="file" name="csv_file" accept=".csv" required>
+            <button type="submit" class="btn">Augšupielādēt</button>
+        </form>
+    </div>
+</body>
+</html>

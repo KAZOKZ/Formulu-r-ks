@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>Ievade: {{ forma.capitalize() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigācija -->
+    <nav>
+        <a href="{{ url_for('index') }}">🏠 Sākums</a>
+        <a href="{{ url_for('grafiki') }}">📊 Datu vizualizācija</a>
+        <a href="{{ url_for('upload_csv') }}">📁 CSV augšupielāde</a>
+    </nav>
+
+    <div class="container">
+        <h1>Ievadi datus: {{ forma.capitalize() }}</h1>
+
+        {% if errors %}
+        <div class="flash-message">
+            <ul>
+                {% for err in errors %}
+                    <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('rezultats') }}" method="post" id="ievades-forma">
+            <input type="hidden" name="forma" value="{{ forma }}">
+
+            {% if forma == 'trijsturis' %}
+                <label for="a">a (pamats):</label>
+                <input type="number" name="a" id="a" min="0" step="0.01" required>
+                <label for="h">h (augstums):</label>
+                <input type="number" name="h" id="h" min="0" step="0.01" required>
+
+            {% elif forma == 'kvadrats' %}
+                <label for="a">a (mala):</label>
+                <input type="number" name="a" id="a" min="0" step="0.01" required>
+
+            {% elif forma == 'taisnsturis' %}
+                <label for="a">a (garums):</label>
+                <input type="number" name="a" id="a" min="0" step="0.01" required>
+                <label for="b">b (platums):</label>
+                <input type="number" name="b" id="b" min="0" step="0.01" required>
+
+            {% elif forma == 'paralelograms' %}
+                <label for="a">a (pamats):</label>
+                <input type="number" name="a" id="a" min="0" step="0.01" required>
+                <label for="h">h (augstums):</label>
+                <input type="number" name="h" id="h" min="0" step="0.01" required>
+
+            {% elif forma == 'romb' %}
+                <label for="d1">d1 (diagonāle 1):</label>
+                <input type="number" name="d1" id="d1" min="0" step="0.01" required>
+                <label for="d2">d2 (diagonāle 2):</label>
+                <input type="number" name="d2" id="d2" min="0" step="0.01" required>
+
+            {% elif forma == 'trapece' %}
+                <label for="a">a (pamats 1):</label>
+                <input type="number" name="a" id="a" min="0" step="0.01" required>
+                <label for="b">b (pamats 2):</label>
+                <input type="number" name="b" id="b" min="0" step="0.01" required>
+                <label for="h">h (augstums):</label>
+                <input type="number" name="h" id="h" min="0" step="0.01" required>
+
+            {% elif forma == 'aplis' %}
+                <label for="r">r (rādiuss):</label>
+                <input type="number" name="r" id="r" min="0" step="0.01" required>
+            {% endif %}
+
+            <p style="font-size: 0.9em; color: #bbb;">💡 Lūdzu, ievadi skaitļus ar punktu, piemēram: <strong>3.14</strong></p>
+
+            <button type="submit">✅ Aprēķināt</button>
+        </form>
+    </div>
+
+    <!-- ✅ JS: komata aizvietošana tikai brīdī, kad forma tiek sūtīta -->
+    <script>
+        document.getElementById("ievades-forma").addEventListener("submit", function () {
+            const inputs = this.querySelectorAll('input[type="number"]');
+            inputs.forEach(function (input) {
+                if (input.value.includes(',')) {
+                    input.value = input.value.replace(',', '.');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

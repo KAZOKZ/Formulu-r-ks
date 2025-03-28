@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezultāts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigācija -->
+    <nav>
+        <a href="{{ url_for('index') }}">🏠 Sākums</a>
+        <a href="{{ url_for('grafiki') }}">📊 Datu vizualizācija</a>
+        <a href="{{ url_for('upload_csv') }}">📁 CSV augšupielāde</a>
+    </nav>
+
+    <div class="container">
+        <h1>Rezultāts</h1>
+
+        <p><strong>Izvēlētā figūra:</strong> {{ forma }}</p>
+        <p><strong>Laukuma formula:</strong> {{ formula }}</p>
+        <p><strong>Aprēķinātais laukums:</strong> <strong>{{ rezultats }}</strong></p>
+
+        <!-- Pogas -->
+        <div class="nav-buttons">
+            <a href="{{ url_for('index') }}" class="btn">↩️ Atgriezties uz sākumu</a>
+            <!-- Risināt vēlreiz poga -->
+            <form action="{{ url_for('ievade') }}" method="post" style="display: inline;">
+                <input type="hidden" name="forma" value="{{ forma|lower }}">
+                <button type="submit" class="btn">🔁 Risināt vēlreiz</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

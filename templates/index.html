@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulu rīks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigācija -->
+    <nav>
+        <a href="{{ url_for('index') }}">🏠 Sākums</a>
+        <a href="{{ url_for('grafiki') }}">📊 Datu vizualizācija</a>
+        <a href="{{ url_for('upload_csv') }}">📁 CSV augšupielāde</a>
+    </nav>
+
+    <div class="container">
+        <h1>Formulu rīks</h1>
+        <p>Izvēlies figūras veidu, lai aprēķinātu laukumu:</p>
+        <form action="/ievade" method="post">
+            <select name="forma" required>
+                <option value="" disabled selected>-- Izvēlies formu --</option>
+                <option value="trijsturis">Trijstūris</option>
+                <option value="kvadrats">Kvadrāts</option>
+                <option value="taisnsturis">Taisnstūris</option>
+                <option value="paralelograms">Paralelograms</option>
+                <option value="romb">Rombs</option>
+                <option value="trapece">Trapecē</option>
+                <option value="aplis">Aplis</option>
+            </select>
+            <button type="submit">Tālāk</button>
+        </form>
+    </div>
+</body>
+</html>
